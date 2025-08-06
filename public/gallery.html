@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Galeri Publik - FotoShare Cloud</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-950 text-white min-h-screen p-6">
-  <h1 class="text-4xl font-bold text-center mb-2">🖼️ Galeri Publik</h1>
-  <p class="text-gray-400 text-center mb-8">Semua gambar yang diupload ke FotoShare Cloud</p>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Galeri Foto Publik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-950 text-white min-h-screen p-6">
+    <h1 class="text-3xl font-bold mb-4 text-center">📸 Galeri Publik</h1>
 
-  <!-- Container Galeri -->
-  <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 md:px-10">
-    <!-- Gambar akan dimasukkan lewat JS -->
-  </div>
+    <div id="gallery" class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></div>
 
-  <footer class="mt-10 text-sm text-center text-gray-500">
-    © 2025 FotoShare Cloud | <a href="/index.html" class="underline text-blue-400 hover:text-blue-500">Kembali ke Upload</a>
-  </footer>
+    <p class="mt-10 text-center text-sm text-gray-400">
+      Powered by GitHub ✨ | © 2025 FotoShare Cloud
+    </p>
 
-  <script>
-    // Contoh list gambar
-    const imageList = [
-    "https://raw.githubusercontent.com/BramantaraWP/zPhoto/main/images/1691234567-photo.jpg"
-    ];
+    <script>
+      async function loadGallery() {
+        const repo = "BramantaraWP/zPhoto";
+        const folder = "images";
+        const url = `https://api.github.com/repos/${repo}/contents/${folder}`;
 
-    const galleryContainer = document.getElementById("gallery");
+        const res = await fetch(url);
+        const data = await res.json();
 
-    imageList.forEach(src => {
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = "Foto";
-      img.className = "w-full h-auto object-cover rounded-lg shadow";
-      galleryContainer.appendChild(img);
-    });
-  </script>
-</body>
+        const gallery = document.getElementById("gallery");
+
+        data.forEach((file) => {
+          if (file.type === "file" && file.download_url) {
+            const img = document.createElement("img");
+            img.src = file.download_url;
+            img.alt = file.name;
+            img.className =
+              "rounded-xl shadow-lg hover:scale-105 transition-transform duration-300";
+
+            gallery.appendChild(img);
+          }
+        });
+      }
+
+      loadGallery();
+    </script>
+  </body>
 </html>
