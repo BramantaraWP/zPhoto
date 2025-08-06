@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galeri Publik - FotoShare Cloud</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-white min-h-screen p-6">
+  <h1 class="text-4xl font-bold text-center mb-2">🖼️ Galeri Publik</h1>
+  <p class="text-gray-400 text-center mb-8">Semua gambar yang diupload ke FotoShare Cloud</p>
+
+  <!-- Container Galeri -->
+  <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 md:px-10">
+    <!-- Gambar akan dimasukkan lewat JS -->
+  </div>
+
+  <footer class="mt-10 text-sm text-center text-gray-500">
+    © 2025 FotoShare Cloud | <a href="/index.html" class="underline text-blue-400 hover:text-blue-500">Kembali ke Upload</a>
+  </footer>
+
+  <script>
+    // Contoh list gambar
+    const imageList = [
+      "images/1691234567890-photo1.jpg",
+      "images/1691234570000-photo2.png",
+      "images/1691234573000-wallpaper3.jpeg",
+      "images/1691234589000-uploaded4.jpg"
+    ];
+
+    const galleryContainer = document.getElementById("gallery");
+
+    imageList.forEach(src => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "Foto";
+      img.className = "w-full h-auto object-cover rounded-lg shadow";
+      galleryContainer.appendChild(img);
+    });
+  </script>
+</body>
+</html>
