@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
   const { fileName, content } = req.body;
 
-  const GITHUB_REPO = 'NAMA_USERNAME/NAMA_REPO';
+  const GITHUB_REPO = 'BramantaraWP/zPhoto';
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
   const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/images/${fileName}`;
